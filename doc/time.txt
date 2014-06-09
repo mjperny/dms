@@ -4,5 +4,6 @@ Gary
 12:30 - 13:00 UML Diagramm 
 13:00 - 13:20 Authentifikation und Autorisation Framework suchen => Apache Shiro
 13:30 - 14:50 Aufsetzen des Domänenmodels + Play Integration
+15:00 - 17:00 Hibernate + MySQL Integration + Play + Eclipse
 
 Melanie

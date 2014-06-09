@@ -1,6 +1,10 @@
 package model;
 
 public enum DocumentCategory {
-	ENTERTAINMENT, WORK, OTHERS;
-
+	ENTERTAINMENT("Entertainment"), WORK("Work"), OTHERS("Others");
+	private String name;
+	
+	private DocumentCategory(String name){
+		this.name = name;
+	}
 }
