@@ -1,0 +1,164 @@
+\documentclass[11pt, a4paper]{article}
+% \usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{url} 
+
+\title{DMS Dokumenten Management System}
+\author{Melanie Göbel, Gary Ye (4BHIT)}
+\date{\today{}, Wien}
+
+\begin{document}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+% commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+% frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+% keywordstyle=\color{blue},       % keyword style
+% language=bash,                   % the language of the code
+  morekeywords={*,...},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+
+\section{Aufgabenstellung}
+
+\subsection*{Dokumenten Management System}
+
+Ein Dokumenten Management System (kurz DMS genannt) erlaubt das zentrale Speichern von beliebigen Dokumenten. Dokumente können somit gezielt an einem Platz gesucht und administriert werden. Eine zentrale Aufgabe eines DMS ist es den Verlauf eines Dokuments aufzuzeichnen und jederzeit abrufen zu können.
+
+\subsection*{Suche / Indizierung}
+
+Ein DMS ist nur so gut, wie seine Suchfunktion. Es soll daher möglich sein nach folgenden Parametern zu suchen.
+
+\begin{itemize}
+\item Autor
+\item Kategorie
+\item Kommentar
+\item Dokumentname
+\item Dokumenttyp
+\item Schlüsselwörter
+\end{itemize}
+Diese Parameter beschreiben auch die Eigenschaften eines Dokuments in dem DMS.
+
+\subsection*{Authentifikation / Autorisierung}
+
+Bei dem DMS soll es sich um ein rollenbasiertes System handeln. Folgende Rollen sollen im System implementiert werden:
+
+\subsubsection*{Administrator}
+Der Administrator hat alle Rechte und kann auf alle Dokumente zugreifen.
+
+\subsubsection*{Dokumentbesitzer}
+Jener Benutzer der ein Dokument im DMS erstmalig erfasst, wird als Dokument Besitzer vermerkt.
+
+\subsubsection*{Dokumentnutzer}
+Der Administrator und der Dokumentbesitzer kann beliebigen andere Benutzer den Zugriff auf das Dokument gewähren.
+Zur Vereinfachung wird beim Zugriff nicht zwischen Lese- und Schreibrechten unterschieden, sprich Zugriff auf ein Dokument bedeutet Lese- und Schreibzugriff.
+
+
+\subsection*{Verlauf}
+
+Für jedes Dokument in dem DMS soll mit einer Versionsnummer versehen und gespeichert werden. Jede Änderung des Dokuments führt dazu, dass die Versionsnummer um eins erhöht wird. Alle Änderungen werden mit folgenden Parameter im DMS gespeichert:
+
+\begin{itemize}
+\item Versionsnummer
+\item Benutzer
+\item Datum / Uhrzeit
+\item Kommentar
+\end{itemize}
+
+\subsection*{Upload / Download}
+
+Das DMS soll in dieser Version folgende Aktionen erlauben:
+
+\subsubsection*{Upload}
+Ein neues bzw. eine neue Version eines Dokuments werden im DMS abgelegt und die Versionsnummer wird um eins erhöht. Ebenso wird der Verlauf um diese Aktion erweitert. Wenn das Dokument zuvor von dem Benutzer heruntergeladen wurde, so führt der Upload zu einer Freigabe des Dokuments, wodurch anderen Dokumentennutzer das Dokument bearbeiten können. Es kann immer nur ein Dokument hochgeladen werden. Ein Hochladen mehrerer Dokumente bzw. ganzer Verzeichnisstrukturen sind in der nächsten Ausbaustufe angedacht.
+
+\subsubsection*{Checkout / Download}
+Ein Checkout eines Dokuments führt gleichzeitig dazu, dass das Dokument im DMS als GESPERRT vermerkt wird. Diese Sperre gilt für alle anderen Benutzer und kann nur von dem Dokumentnutzer durch einen UPLOAD einer neuen Version bzw. mit Hilfe der GUI durch den Dokumentbesitzer bzw. Administrator freigegeben werden.
+
+\subsubsection*{Löschen}
+Ein bestehendes Dokument kann nur gelöscht werden, wenn es nicht gesperrt ist. Das Löschen des Dokuments erfolgt auch physisch und führt dazu das alle Einträge im DMS (Bsp. Verlauf, Dokumentbenutzer, etc.) gelöscht werden.
+
+
+
+Erstelle mit Hilfe der Frameworks JEE oder Play eine Webapplikation, die die Funktionalität dieses Dokumentenmanagementsystems abbildet. Verwende das ORM Framework Hibernate um die Daten des Dokuments in einer Datebank abzuspeichern. Führe zu Beginn der Arbeit eine ausführliche Analyse \& Designphase durch, um die Problem noch vor der Implementierung mit den Projektmitgliedern abzuklären.
+
+\section{Designüberlegung}
+
+Das Analyse und das Design wurde mittels eines UML Klassen Diagrams realisiert.
+
+% TODO: Add UML diagram here
+
+\section{Arbeitsaufteilung}
+
+Es wurde beschlossen alle Features zu implementieren, daher sind die Arbeitsaufteilung wie gefolgt. 
+
+\begin{itemize}
+  \item Domänenmodell werden von beiden Teammitgliedern designed.
+  \item Authentifikation und Autorisierung wird von Gary Ye durchgeführt.
+  \item GUI Oberfläche wird von Melanie Göbel gestaltet.
+  \item Unit Testing wird von Gary Ye durchgeführt.
+  \item Functional Testing wird von Melanie durchgeführt.
+\end{itemize}
+
+\section{Aufwandsschätzung}
+
+\subsection*{Melanie Göbel}
+\begin{center}
+  \begin{tabular}{| l | l | l |}
+    \hline
+    Task & Geschätzt & Tatsächlich \\ \hline
+    
+  \end{tabular}
+\end{center}
+
+
+\subsection*{Gary Ye}
+\begin{center}
+  \begin{tabular}{| l | l | l |}
+    \hline
+    Task & Geschätzt & Tatsächlich \\ \hline
+    Domämenmodell Design & 2h & 1.5h
+    Authentifikation und Autorisierung & 3h & \\ \hline
+    Backend & 5h & \\ \hline
+  \end{tabular}
+\end{center}
+
+\section{Vorbereitung und Installation}
+\section{Neue Technologie}
+
+\subsection{Apache Shiro}
+
+\section{Testbericht}
+\section{Aufgetretene Probleme}
+\section{Resultate und Niederlagen}
+\subsection{Niederlagen}
+\bibliography{protokoll}{}
+\bibliographystyle{plain}
+\end{document}
