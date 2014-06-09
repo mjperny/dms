@@ -1,7 +1,11 @@
 package model;
 
-public class Document {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public class Document {
+	@Id
 	private long id;
 
 	private String name;

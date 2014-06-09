@@ -2,6 +2,7 @@ Gary
 
 09. Juni 2014
 12:30 - 13:00 UML Diagramm 
-13:00 - ?     Authentifikation und Autorisation 
+13:00 - 13:20 Authentifikation und Autorisation Framework suchen => Apache Shiro
+13:30 - 14:50 Aufsetzen des Domänenmodels + Play Integration
 
 Melanie

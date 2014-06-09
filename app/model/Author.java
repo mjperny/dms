@@ -1,9 +1,11 @@
 package model;
 
-public class Author extends User {
+import javax.persistence.*;
 
+@Entity
+public class Author extends User {
+	@Id @GeneratedValue
 	private long id;
 
 	private Document[] document;
-
 }
