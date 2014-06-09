@@ -16,6 +16,30 @@ public class User {
 	@Column(unique=true, nullable=false)
 	private String name;
 
-	@OneToMany
+	@OneToMany(mappedBy="author")
 	private Collection<Document> createdDocuments;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Collection<Document> getCreatedDocuments() {
+		return createdDocuments;
+	}
+
+	public void setCreatedDocuments(Collection<Document> createdDocuments) {
+		this.createdDocuments = createdDocuments;
+	}
 }

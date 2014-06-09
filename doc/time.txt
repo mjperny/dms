@@ -5,5 +5,6 @@ Gary
 13:00 - 13:20 Authentifikation und Autorisation Framework suchen => Apache Shiro
 13:30 - 14:50 Aufsetzen des Domänenmodels + Play Integration
 15:00 - 17:00 Hibernate + MySQL Integration + Play + Eclipse
+17:00 - 19:00 Hibernate Mapping
 
 Melanie

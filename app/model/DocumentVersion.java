@@ -6,24 +6,30 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class DocumentVersion {
+	private static final int MAX_SIZE = (1 << 24) - 1; // ~16MB
 	@Id @GeneratedValue
 	private long id;
 
 	private String comment;
 
-	@Column(nullable=false)
+	@OneToOne
+	@JoinColumn(name="user", referencedColumnName="id")
 	private User user;
 
 	@Column(nullable=false)
 	private Date time;
 	
 	@ManyToOne
+	@JoinColumn(name="document", referencedColumnName="id")
 	private Document document;
 	
+	@Column(length=DocumentVersion.MAX_SIZE) // Forcing a mediumblob 16MB
 	private byte[] content;
 
 	public long getId() {
@@ -65,7 +71,7 @@ public class DocumentVersion {
 	public void setDocument(Document document) {
 		this.document = document;
 	}
-
+	
 	public byte[] getContent() {
 		return content;
 	}
