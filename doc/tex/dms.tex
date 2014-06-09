@@ -29,13 +29,11 @@
 % keywordstyle=\color{blue},       % keyword style
 % language=bash,                   % the language of the code
   morekeywords={*,...},            % if you want to add more keywords to the set
-  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
   numbersep=5pt,                   % how far the line-numbers are from the code
   rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
   showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
   showstringspaces=false,          % underline spaces within strings only
   showtabs=false,                  % show tabs within strings adding particular underscores
-  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
   tabsize=2,                       % sets default tabsize to 2 spaces
   title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
 }
@@ -80,7 +78,6 @@ Jener Benutzer der ein Dokument im DMS erstmalig erfasst, wird als Dokument Besi
 Der Administrator und der Dokumentbesitzer kann beliebigen andere Benutzer den Zugriff auf das Dokument gewähren.
 Zur Vereinfachung wird beim Zugriff nicht zwischen Lese- und Schreibrechten unterschieden, sprich Zugriff auf ein Dokument bedeutet Lese- und Schreibzugriff.
 
-
 \subsection*{Verlauf}
 
 Für jedes Dokument in dem DMS soll mit einer Versionsnummer versehen und gespeichert werden. Jede Änderung des Dokuments führt dazu, dass die Versionsnummer um eins erhöht wird. Alle Änderungen werden mit folgenden Parameter im DMS gespeichert:
@@ -111,9 +108,23 @@ Erstelle mit Hilfe der Frameworks JEE oder Play eine Webapplikation, die die Fun
 
 \section{Designüberlegung}
 
+
+\subsection{Domänenmodell}
 Das Analyse und das Design wurde mittels eines UML Klassen Diagrams realisiert.
 
 % TODO: Add UML diagram here
+
+
+Am Ende schaut das Model folgendermaßen aus:
+
+\subsection{Technologien}
+
+Es wurde beschlossen das Play Web Framework zu verwendne. Desweiteren wurde, da es auch verlangt wurde, das ORM Framework Hibernate eingesetzt. Für die Authentifikation und Autorisierung wurde das Shiro Framework zu verwenden, da es nicht zu komplex und gut für die Applikation wirkt. 
+
+Als Datenbank wurde die MySQL Datenbank ausgewählt, da sehr viel Erfahrung damit besteht.
+% TODO: Shiro http://shiro.apache.org/java-authentication-guide.html
+% TODO: Hibernate http://hibernate.org/ 
+% TODO: Play http://playframework.com
 
 \section{Arbeitsaufteilung}
 
@@ -144,22 +155,114 @@ Es wurde beschlossen alle Features zu implementieren, daher sind die Arbeitsauft
   \begin{tabular}{| l | l | l |}
     \hline
     Task & Geschätzt & Tatsächlich \\ \hline
-    Domämenmodell Design & 2h & 1.5h
+    Domänenmodell Design & 2h & 1.5h \\ \hline
+		Domänenmodell Implementierung & 1h & 2h \\ \hline
     Authentifikation und Autorisierung & 3h & \\ \hline
-    Backend & 5h & \\ \hline
+		Gesamt & & \\ \hline
   \end{tabular}
 \end{center}
 
 \section{Vorbereitung und Installation}
+
+\subsection{Play}
+
+Mit Play einfach eine neue Applikation erstellen. (Es wird angenommen, dass Play schon wegen der vorigen Übung erfolgreich auf dem System installiert ist)
+
+\begin{lstlisting}
+> play new dms
+\end{lstlisting}
+
+Integration mit Eclipse erfolgt mit 
+
+\begin{lstlisting}
+> play eclipse
+\end{lstlisting}
+
+\subsection{Play Konfiguration mit MySQL}
+
+Damit Play im Hintergrund mit MySQL arbeitet, müssen einige Änderungen vorgenommen werden.
+
+\subsubsection*{Datenbank erstellen}
+
+Folgende Befehle müssen zuerst in der Datenbank durchgeführt werden.
+
+\begin{lstlisting}
+mysql>CREATE DATABASE dms;
+mysql>GRANT ALL PRIVILEGES ON dms.* TO 'dmsuser'@'%' IDENTIFIED BY 'dmspassword';
+mysql>FLUSH PRIVILEGES;\end{lstlisting}
+
+
+\subsubsection*{application.conf}
+
+In dem File müssen wir die JDBC Einstellungen an die zu verwendende Datenbank anpassen. Hierbei verbinden wir uns mit der MySQL Datenbank namens "dms", die auf dem Server mit dem Hostnamen "ubuntu-vm" liegt. 
+
+\begin{lstlisting}
+db.default.driver=com.mysql.jdbc.Driver
+db.default.url="jdbc:mysql://ubuntu-vm/dms"
+db.default.user=dmsuser
+db.default.password=dmspassword\end{lstlisting}
+
+\subsubsection*{build.sbt}
+
+Auch hier muss eine Zeile hinzugefügt werden, damit der MySQL Treiber auch verwendet wird.
+\begin{lstlisting}
+libraryDependencies ++= Seq(
+  ...
+	"mysql" % "mysql-connector-java" % "5.1.18",
+}\end{lstlisting}
+
+\subsection{JPA (Hibernate) in Play}
+
+\subsubsection*{build.sbt}
+
+\begin{lstlisting}
+libraryDependencies ++= Seq(
+  ...
+	javaJpa,
+	"org.hibernate" % "hibernate-entitymanager" % "4.2.2.Final"
+}\end{lstlisting}
+
+\subsubsection*{application.conf}
+
+Die folgenden Zeilen müssen hinzugefügt werden.
+
+\begin{lstlisting}
+jpa.default=defaultPersistenceUnit
+db.default.jndiName=DefaultDS
+\end{lstlisting}
+
+\subsubsection*{persistence.xml}
+
+Das File sollte im conf/META-INF Ordner liegen.
+
+\begin{lstlisting}
+<?xml version="1.0"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" version="2.0">
+  <persistence-unit name="defaultPersistenceUnit" transaction-type="RESOURCE_LOCAL">
+    <!-- <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <non-jta-data-source>DefaultDS</non-jta-data-source> -->
+    <properties>
+      <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+      <property name="hibernate.connection.url" value="jdbc:mysql://ubuntu-vm:3306/dms"/>
+      <property name="hibernate.connection.username" value="dmsuser"/>
+      <property name="hibernate.connection.password" value="dmspassword"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+      <property name="hibernate.show_sql" value="false"/>
+      <property name="hibernate.hbm2ddl.auto" value="create"/>
+    </properties>
+  </persistence-unit>
+</persistence>
+\end{lstlisting}
+
 \section{Neue Technologie}
 
 \subsection{Apache Shiro}
 
 \subsection{Play}
 
-
 Um JPA aufzusetzen.
 1.) Codezeilen uncommenten.
+
 http://www.playframework.com/documentation/2.1.0/JavaJPA
 
 \section{Testbericht}
