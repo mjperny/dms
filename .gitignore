@@ -5,6 +5,9 @@ project/target
 target
 tmp
 
+# General
+*.lock
+
 # LaTeX
 *.aux
 *.glo
