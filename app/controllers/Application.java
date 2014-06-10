@@ -7,6 +7,10 @@ import play.db.jpa.*;
 import play.mvc.*;
 import views.html.*;
 
+/**
+ * 
+ * @version 2014-06-07
+ */
 public class Application extends Controller {
 
 	public static Result index() {

@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * @version 2014-06-07
+ */
 public enum DocumentType {
 	OTHERS("Others"), PICTURE("Picture"), TEXT("Text"), APPLICATION("Application");
 	
@@ -7,5 +10,9 @@ public enum DocumentType {
 	
 	private DocumentType(String name){
 		this.name = name;
+	}
+	
+	public String toString(){
+		return name;
 	}
 }
