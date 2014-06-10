@@ -4,7 +4,8 @@
 
 # Home page
 GET     /                           controllers.Application.index()
-GET     /createDocument                  controllers.Application.createDocument()
+GET     /createDocument             controllers.Application.createDocument()
+GET     /login                      controllers.Application.login()
 GET			/test												controllers.Application.test()
 
 
