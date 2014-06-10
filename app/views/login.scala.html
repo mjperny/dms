@@ -1,4 +1,4 @@
-@(form: Form[Application.Login])
+@(form: Form[model.User])
 @if(form.hasGlobalErrors) {
     <p class="error">
         @form.globalError.message
