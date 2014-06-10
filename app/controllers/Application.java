@@ -1,5 +1,6 @@
 package controllers;
 
+import static play.data.Form.*;
 import play.*;
 import play.db.jpa.*;
 import play.mvc.*;
@@ -12,7 +13,7 @@ public class Application extends Controller {
     }
     public static Result createDocument() {
       return ok(
-        createDocument.render()
+        createDocument.render(form(CreateDocument.class))
       );
     }
     
@@ -20,4 +21,10 @@ public class Application extends Controller {
     public static Result test() { 
     	return TODO;
     }
+
+public static class CreateDocument {
+    public String name;
+    public String comment;
+
+}
 }

@@ -1,13 +1,26 @@
+@(form: Form[Application.CreateDocument])
 <html>
+   
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
     <head>
         <title>Create new Document</title>
         
       
     </head>
     <body>
-        <header>
-            Not implemented yet.
-        </header>
-    
-    </body>
+
+   <h1>Upload new Document</h1>
+
+   <p>
+       <input type="name" name="name" placeholder="Name">
+   </p>
+   <p>
+       <input type="comment" name="comment" placeholder="Comment">
+   </p>
+   <p>
+       <button type="submit">Create</button>
+   </p>
+</body>
+
 </html>
+
