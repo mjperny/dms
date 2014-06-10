@@ -10,6 +10,11 @@ public class Application extends Controller {
     public static Result index() {
         return ok(index.render("Your new application is ready."));
     }
+    public static Result createDocument() {
+      return ok(
+        createDocument.render()
+      );
+    }
     
     @Transactional
     public static Result test() { 
