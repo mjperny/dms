@@ -1,3 +1,9 @@
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import model.HibernateUtils;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.util.Factory;
@@ -21,6 +27,11 @@ public class Global extends GlobalSettings {
     Factory<SecurityManager> factory = new IniSecurityManagerFactory("classpath:shiro.ini");
     SecurityManager securityManager = factory.getInstance();
     SecurityUtils.setSecurityManager(securityManager);
+    
+    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("dms");
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+	  
+    HibernateUtils.setEntityManager(entityManager);
   }
   
   @Override

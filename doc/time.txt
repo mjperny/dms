@@ -7,4 +7,8 @@ Gary
 15:00 - 17:00 Hibernate + MySQL Integration + Play + Eclipse
 17:00 - 19:00 Hibernate Mapping
 
+10. Juni 2014
+19:00 - 19:30 Apache Shiro Konfiguration und Aufsetzen
+21:15 - 21:30 Formular files gefixed.
+
 Melanie
