@@ -1,25 +1,34 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 
 @Entity
-public class Role {
+@Inheritance(strategy=InheritanceType.JOINED)
+public abstract class Role {
 	@Id @GeneratedValue
-	private long id;
+	protected long id;
 	
 	@Column
-	private String roleName;
+	protected String roleName;
 	
 	@Column
 	@ManyToMany
-	private Collection<Permission> permissions;
-
+	protected Collection<Permission> permissions;
+	
+	public Role(){
+		permissions = new ArrayList<>();
+		roleName = "";
+	}
+	
 	/**
 	 * @return the id
 	 */

@@ -2,15 +2,19 @@ package model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @Entity
-public class Permission {
-	@Id
-	private long id;
+@Inheritance(strategy=InheritanceType.JOINED)
+public abstract class Permission {
+	@Id @GeneratedValue
+	protected long id;
 	
 	@Column
-	private String permissionName;
+	protected String permissionName;
 
 	/**
 	 * @return the id

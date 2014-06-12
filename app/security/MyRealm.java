@@ -19,7 +19,13 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-// http://shiro.apache.org/static/1.2.3/xref/org/apache/shiro/realm/jdbc/JdbcRealm.html#338
+
+/**
+ * This realm is based on the Hibernate ORM technology to retrieve the data.
+ * http://shiro.apache.org/static/1.2.3/xref/org/apache/shiro/realm/jdbc/JdbcRealm.html#338
+ * @author Gary Ye
+ * @version 2014-06-07
+ */
 public class MyRealm extends JdbcRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(
