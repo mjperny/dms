@@ -108,7 +108,15 @@ Erstelle mit Hilfe der Frameworks JEE oder Play eine Webapplikation, die die Fun
 
 \section{Designüberlegung}
 
+Aus Flexibilitäts Gründen wurde der Dokument-Typ und die Dokument-Kategorie ausgelegt und als Enum realisiert. Wenn auf ein Dokument zugegriffen wird,
+soll dieses gelockt sein, dies realisieren wir mit einer boolean Variable in der Document Klasse. Um das Document zu verwalten besteht eine Komposition zwischen Document und DocumentVersion. Ein Document hat nämlich mehrere Versionen. Eine Version steht immer im Zusammenhang zu einem User, da es immer einen Editor gab.
 
+
+
+Zur Authentifikation & Autorisierung haben wir vor Apache Shiro zu verwenden. Apache Shiro ist ein Java Sicherheits Framework, das Authentifikation, Autorisierung,
+Cryptographie, uvm. (wenn du nochmehr willst dann schreib hier was hin Garry!! :) )
+
+B
 \subsection{Domänenmodell}
 Das Analyse und das Design wurde mittels eines UML Klassen Diagrams realisiert.
 
@@ -117,9 +125,12 @@ Das Analyse und das Design wurde mittels eines UML Klassen Diagrams realisiert.
 
 Am Ende schaut das Model folgendermaßen aus:
 
+% TODO: Add UML final diagram here.
+
+
 \subsection{Technologien}
 
-Es wurde beschlossen das Play Web Framework zu verwendne. Desweiteren wurde, da es auch verlangt wurde, das ORM Framework Hibernate eingesetzt. Für die Authentifikation und Autorisierung wurde das Shiro Framework zu verwenden, da es nicht zu komplex und gut für die Applikation wirkt. 
+Es wurde beschlossen das Play Web Framework zu verwenden. Desweiteren wurde, da es auch verlangt wurde, das ORM Framework Hibernate eingesetzt. Für die Authentifikation und Autorisierung wurde für das Shiro Framework entschieden, da es nicht zu komplex wirkt und gut für die Applikation ausmacht. 
 
 Als Datenbank wurde die MySQL Datenbank ausgewählt, da sehr viel Erfahrung damit besteht.
 % TODO: Shiro http://shiro.apache.org/java-authentication-guide.html
