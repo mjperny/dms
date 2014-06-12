@@ -6,6 +6,7 @@
 GET     /                           controllers.Application.index()
 GET     /createDocument             controllers.Application.createDocument()
 GET     /login                      controllers.Application.login()
+GET     /search                     controllers.Application.searchDocument()
 GET			/test												controllers.Application.test()
 
 

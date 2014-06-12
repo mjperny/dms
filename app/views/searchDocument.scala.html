@@ -1,0 +1,66 @@
+@(form: Form[model.Document])
+<html>
+   
+        <link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
+    <head>
+        <title>Search for Documents</title>
+        
+      
+    </head>
+    <body bgcolor="#CEF6F5">
+
+   <h1>Search for Documents</h1>
+
+   <table border=0>
+           <tr>
+           <td> Author </td>
+           <td> <input type="author" name="author" placeholder="Author"> </td>
+           </tr>
+
+	   <tr>
+           <td> Category </td>
+             <td> <select name="category">
+                        <option>Work</option>
+                        <option>Entertainment</option>
+                        <option>Others</option>
+                  </select> 
+             </td>
+           </tr>
+           
+           <tr>
+           <td> Comment </td>
+           <td> <input type="comment" name="comment" placeholder="Comment"> </td>
+           </tr>
+ 
+           <tr>
+           <td> Documentname </td>
+           <td> <input type="name" name="name" placeholder="Name"> </td>
+           </tr>
+
+           <tr>
+           <td> Documenttype </td>
+            <td> <select name = "documenttype">
+                        <option>Picture</option>
+                        <option>Text</option>
+                        <option>Application</option>
+                        <option>Others</option>
+                  </select> 
+             </td>
+           </tr>
+
+           <tr>
+           <td> Keyword </td>
+           <td> <input type="keyword" name="keyword" placeholder="keyword"> </td>
+           </tr>
+  
+  </table>
+   
+   
+   
+   <p>
+       <button type="submit">Search</button>
+   </p>
+</body>
+
+</html>
+

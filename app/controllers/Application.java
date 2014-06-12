@@ -20,6 +20,9 @@ public class Application extends Controller {
 	public static Result login() {
 		return ok(login.render(form(model.User.class)));
 	}
+        public static Result searchDocument() {
+		return ok(searchDocument.render(form(model.Document.class)));
+	}
 
 	public static Result createDocument() {
 		return ok(createDocument.render(form(model.Document.class)));
