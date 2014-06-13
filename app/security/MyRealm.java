@@ -7,7 +7,6 @@ import java.util.Set;
 import model.Permission;
 import model.Role;
 import model.User;
-import model.UserDAO;
 
 import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -18,6 +17,8 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+
+import dao.UserDAO;
 
 
 /**
@@ -33,11 +34,13 @@ public class MyRealm extends JdbcRealm {
 		UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) token;
 		String username = usernamePasswordToken.getUsername();
 		String password = null;
+		
+		System.out.println("Checking authentification for user " + username);
 		if (username == null)
 			throw new AccountException(
 					"Null usernames not allowed by this realm.");
-		password = UserDAO.getUserByName(username).getPassword();
-
+		User user = User.find("byName", username).first();
+		password = user.getPassword();
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username,
 				password, getName());
 		return info;
@@ -47,7 +50,7 @@ public class MyRealm extends JdbcRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals){
 		String username = (String) getAvailablePrincipal(principals);
 		
-		User user = UserDAO.getUserByName(username);
+		User user = (new UserDAO()).findByName(username);
 		
 		Set<String> roleNames = new LinkedHashSet<String>();
 		Set<String> permissionNames = new LinkedHashSet<String>();

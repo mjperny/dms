@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -14,10 +15,9 @@ import javax.persistence.OneToMany;
  * @version 2014-06-07
  */
 @Entity
-public class User {
-	@Id @GeneratedValue
-	private long id;
-	
+public class User extends play.db.jpa.Model{
+	private static final long serialVersionUID = -8218575344530428444L;
+
 	@Column(unique=true, nullable=false)
 	private String name;
 	
@@ -31,11 +31,10 @@ public class User {
 	@OneToMany(mappedBy="author")
 	private Collection<Document> createdDocuments;
 
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
+	
+	public User() {
+		this.roles = new ArrayList<>();
+		this.createdDocuments = new ArrayList<>();
 	}
 
 	/**

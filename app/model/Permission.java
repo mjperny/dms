@@ -7,21 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
+import play.db.jpa.Model;
+
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public abstract class Permission {
-	@Id @GeneratedValue
-	protected long id;
-	
+public abstract class Permission extends Model {
 	@Column
 	protected String permissionName;
-
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
 
 	/**
 	 * @param id the id to set
@@ -44,5 +36,11 @@ public abstract class Permission {
 		this.permissionName = permissionName;
 	}
 	
+	/**
+	 * returns the permission name
+	 */
+	public String toString(){
+		return getPermissionName();
+	}
 	
 }

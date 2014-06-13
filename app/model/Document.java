@@ -12,16 +12,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import play.db.jpa.Model;
+
 /**
  * This is the document class. These documents will be persisted in the database, so that
  * the user can retrieve it later.
  * @version 2014-06-07
  */
 @Entity
-public class Document {
-	@Id @GeneratedValue
-	private long id;
-
+public class Document extends Model {
 	@Column(nullable=false)
 	private String name;
 
@@ -43,20 +42,6 @@ public class Document {
 
 	@Enumerated(EnumType.STRING)
 	private DocumentCategory documentCategory;
-
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	/**
 	 * @return the name

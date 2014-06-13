@@ -4,30 +4,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import play.db.jpa.Model;
+
 /**
  * 
  * @version 2014-06-07
  */
 @Entity
-public class Keyword {
-	@Id @GeneratedValue
-	private long id;
-
+public class Keyword extends Model {
 	private String name;
-
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	/**
 	 * @return the name

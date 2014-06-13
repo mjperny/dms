@@ -1,5 +1,7 @@
 package model;
 
+import play.db.jpa.JPA;
+
 /**
  * This class will manage the permissions of the documents.
  * The permissions should look like doc:$docid:$permission
@@ -9,13 +11,12 @@ package model;
  * @version 
  */
 public class PermissionManager {
-	private PermissionManager instance;
+	private static PermissionManager instance;
 	
 	private PermissionManager(){
-
 	}
 
-	public PermissionManager getInstance(){
+	public static PermissionManager getInstance(){
 		if(instance == null){
 			instance = new PermissionManager();
 		}
@@ -29,5 +30,6 @@ public class PermissionManager {
 	 */
 	public void grantAccess(User user, Role role){
 		user.getRoles().add(role);
+		user.save();
 	}
 }

@@ -11,12 +11,11 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToMany;
 
+import play.db.jpa.Model;
+
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
-public abstract class Role {
-	@Id @GeneratedValue
-	protected long id;
-	
+public abstract class Role extends Model {
 	@Column
 	protected String roleName;
 	
@@ -26,23 +25,8 @@ public abstract class Role {
 	
 	public Role(){
 		permissions = new ArrayList<>();
-		roleName = "";
 	}
 	
-	/**
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	/**
 	 * @return the roleName
 	 */
