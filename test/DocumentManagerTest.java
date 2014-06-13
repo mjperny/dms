@@ -1,5 +1,10 @@
+import java.util.Collection;
+import java.util.Locale.Category;
+
 import models.Document;
+import models.DocumentCategory;
 import models.DocumentManager;
+import models.DocumentType;
 import models.User;
 
 import org.junit.Before;
@@ -29,5 +34,24 @@ public class DocumentManagerTest extends UnitTest {
 		assertTrue(doc.getAuthor() == user);
 	}
 	
+	@Test
+	public void testFindByNameContains(){
+		DocumentManager dm = new DocumentManager();
+		Collection<Document> res = dm.findByNameContains("doc");
+		assertEquals(2, res.size());
+	}
 	
+	@Test
+	public void testFindByCategory(){
+		DocumentManager dm = new DocumentManager();
+		Collection<Document> res = dm.findByCategory(DocumentCategory.ENTERTAINEMENT);
+		assertEquals(2, res.size());
+	}
+	
+	@Test
+	public void testFindByType(){
+		DocumentManager dm = new DocumentManager();
+		Collection<Document> res = dm.findByType(DocumentType.PICTURE);
+		assertEquals(1, res.size());
+	}
 }

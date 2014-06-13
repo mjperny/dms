@@ -46,6 +46,10 @@ target/
 # OS Files #
 .DS_Store
 
+# Vim
+*.swo
+*.swp
+
 *.class
 
 # Package Files #

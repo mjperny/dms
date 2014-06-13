@@ -22,8 +22,6 @@ public class AuthenticationTest extends UnitTest{
 	public void setUp(){
 		Fixtures.deleteAllModels();
 		Fixtures.loadModels("authentication.yml");
-		User user = User.find("byName", "gary").first();
-		System.out.println(user.id);
 	}
 
 	

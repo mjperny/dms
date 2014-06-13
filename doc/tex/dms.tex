@@ -111,22 +111,19 @@ Erstelle mit Hilfe der Frameworks JEE oder Play eine Webapplikation, die die Fun
 Aus Flexibilitäts Gründen wurde der Dokument-Typ und die Dokument-Kategorie ausgelegt und als Enum realisiert. Wenn auf ein Dokument zugegriffen wird,
 soll dieses gelockt sein, dies realisieren wir mit einer boolean Variable in der Document Klasse. Um das Document zu verwalten besteht eine Komposition zwischen Document und DocumentVersion. Ein Document hat nämlich mehrere Versionen. Eine Version steht immer im Zusammenhang zu einem User, da es immer einen Editor gab.
 
+Zur Authentifikation und Autorisierung haben wir vor Apache Shiro zu verwenden. Apache Shiro ist ein Java Sicherheits Framework, das Authentifikation, Autorisierung,
+Kryptographie, uvm. unterstützt.
 
-
-Zur Authentifikation & Autorisierung haben wir vor Apache Shiro zu verwenden. Apache Shiro ist ein Java Sicherheits Framework, das Authentifikation, Autorisierung,
-Cryptographie, uvm. (wenn du nochmehr willst dann schreib hier was hin Garry!! :) )
-
-B
 \subsection{Domänenmodell}
 Das Analyse und das Design wurde mittels eines UML Klassen Diagrams realisiert.
 
-% TODO: Add UML diagram here
-
+\includegraphics[width=\textwidth]{pic/dms-begin}
 
 Am Ende schaut das Model folgendermaßen aus:
 
-% TODO: Add UML final diagram here.
+\includegraphics[width=\textwidth]{pic/dms-end}
 
+Die Klassen bezüglich RBAC wurden bei der Planung nicht beachtet, da diese Technologie sehr neu war. Außerdem wurde vor der Planung für das Shiro Framework entschieden und davor ist der Aufbau der benötigten Klassen nicht bekannt gewesen.
 
 \subsection{Technologien}
 
@@ -155,8 +152,9 @@ Es wurde beschlossen alle Features zu implementieren, daher sind die Arbeitsauft
 \begin{center}
   \begin{tabular}{| l | l | l |}
     \hline
-    Task & Geschätzt & Tatsächlich \\ \hline
-    
+    Task & Geschätzt & Tatsächlich \\ \hline    
+		Grafische Oberfläche & 5 & 2 \\ \hline
+		Gesamt & 5 & 2 \\ \hline
   \end{tabular}
 \end{center}
 
@@ -167,14 +165,13 @@ Es wurde beschlossen alle Features zu implementieren, daher sind die Arbeitsauft
     \hline
     Task & Geschätzt & Tatsächlich \\ \hline
     Domänenmodell Design & 2h & 1.5h \\ \hline
-		Domänenmodell Implementierung & 1h & 2h \\ \hline
-    Authentifikation und Autorisierung & 3h & \\ \hline
-		Gesamt & & \\ \hline
+		Domänenmodell Implementierung & 1h & 4h \\ \hline
+    Authentifikation und Autorisierung & 3h & 6h \\ \hline
+		Gesamt & 6 & 11.5 \\ \hline
   \end{tabular}
 \end{center}
 
 \section{Vorbereitung und Installation}
-
 \subsection{Play}
 
 Mit Play einfach eine neue Applikation erstellen. (Es wird angenommen, dass Play schon wegen der vorigen Übung erfolgreich auf dem System installiert ist)
@@ -187,6 +184,12 @@ Integration mit Eclipse erfolgt mit
 
 \begin{lstlisting}
 > play eclipse
+\end{lstlisting}
+
+In Play 1.2.7 erfolgt es mit
+
+\begin{lstlisting}
+> play eclipsify
 \end{lstlisting}
 
 \subsection{Play Konfiguration mit MySQL}
@@ -202,8 +205,7 @@ mysql>CREATE DATABASE dms;
 mysql>GRANT ALL PRIVILEGES ON dms.* TO 'dmsuser'@'%' IDENTIFIED BY 'dmspassword';
 mysql>FLUSH PRIVILEGES;\end{lstlisting}
 
-
-\subsubsection*{application.conf}
+\subsubsection*{application.conf (Play 2.x)}
 
 In dem File müssen wir die JDBC Einstellungen an die zu verwendende Datenbank anpassen. Hierbei verbinden wir uns mit der MySQL Datenbank namens "dms", die auf dem Server mit dem Hostnamen "ubuntu-vm" liegt. 
 
@@ -222,7 +224,7 @@ libraryDependencies ++= Seq(
 	"mysql" % "mysql-connector-java" % "5.1.18",
 }\end{lstlisting}
 
-\subsection{JPA (Hibernate) in Play}
+\subsection{JPA (Hibernate) (Play 2.x)}
 
 \subsubsection*{build.sbt}
 
@@ -269,14 +271,39 @@ Das File sollte im conf/META-INF Ordner liegen.
 
 \subsection{Apache Shiro}
 
-\subsection{Play}
-
-Um JPA aufzusetzen.
-1.) Codezeilen uncommenten.
-
-http://www.playframework.com/documentation/2.1.0/JavaJPA
+Apache Shiro ist ein Framework für Authentifizierung und Autorisierung. Außerdem beinhaltet es Features wie Caching, Session und Kryptografie. 
 
 \section{Testbericht}
+\subsection{Testing in Play 1.2.7}
+
+Getestet wurde mit Hilfe einer JUnit Erweiterung von Play, die einem "Fixture" anbietet. Man kann jede vor jedem Testcase die Datenbank auf einen bestimmten Zustand setzen, damit ein Testcase nicht von vorherigen Testcases beeinträchtigt wird.
+
+Im Test Verzeichnis wurden mehrere yml Files angelegt, diese sind yml Files, die die Datenbank beschreiben. Die Syntax ist sehr einfach und findet man unter. % TODO cite yml  
+
+Als Beispiel wurde hier das yml für das Testen der Authentifizierung verwendet.
+
+\begin{lstlisting}
+User(gary):
+  name: "gary"
+  password: "password"
+
+User(tom):
+  name: "tom"
+  password: "letmein"
+\end{lstlisting}
+
+Hier wurden zwei Users erstellt, wobei der erste den Variablennamen (den man in den Klammern neben der Klassenname stehen hat) "gary" hat. 
+
+Dabei muss man auf einige Bedinungen achten:
+\begin{itemize}
+	\item Es dürfen keine Tabs für Einrückungen verwendet werden, stattdessen benutzt man die alte Variante, nämlich die Leerzeichen.
+	\item Die Model klassen müssen im Package models liegen. Es gab am Anfang ein Problem, weil das Package "model" hieß und die Klassen konnten nicht gefunden werden.
+\end{itemize}
+
+Mit der grafischen Oberfläche kann man ganz leicht auswählen, welche Tests zu testen sind.
+
+\includegraphics[width=\textwidth]{pic/play-test}
+
 \section{Aufgetretene Probleme}
 \subsection{Play Version inkompatibel mit JPA}
 Ab Play 2.x wurden viele Klassen wie z.B. jpa.db.jpa.Model entfernt, daher mussten wir zu Play 1.2.7 Version wechseln, da sie diese Klasse und vieles mehr unterstützt. Dies hat sehr viel Zeit gekostet, da die Konfiguration in den beiden Versionen nicht gleich waren. 
@@ -291,7 +318,6 @@ beschrieben durchführt.
 Bei N:M Beziehung tritt dieser Fall nicht auf.
 
 \section{Resultate und Niederlagen}
-\subsection{Niederlagen}
-\bibliography{protokoll}{}
-\bibliographystyle{plain}
+% \bibliography{protokoll}{}
+% \bibliographystyle{plain}
 \end{document}

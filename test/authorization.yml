@@ -12,6 +12,8 @@ Document(doc1):
   lockedStatus: true
   keyWords: []
   versions: []
+  documentType: TEXT 
+  documentCategory: ENTERTAINEMENT
 
 Document(doc2):
   name: "doc2"
@@ -19,6 +21,8 @@ Document(doc2):
   lockedStatus: true
   keyWords: []
   versions: []
+  documentType: PICTURE
+  documentCategory: ENTERTAINEMENT
 
 User(tom):
   name: "tom"
