@@ -10,7 +10,8 @@
       <property name="hibernate.connection.password" value="dmspassword"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
       <property name="hibernate.show_sql" value="false"/>
-      <property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hbm2ddl.auto" value="create-drop"/> <!-- TODO: Change to create for production-->
+
     </properties>
   </persistence-unit>
 </persistence>

@@ -5,7 +5,7 @@ import play.mvc.*;
 
 import java.util.*;
 
-import model.*;
+import models.*;
 
 public class Application extends Controller {
 

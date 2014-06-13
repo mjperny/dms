@@ -1,7 +1,7 @@
 package dao;
 
 import play.db.jpa.JPA;
-import model.User;
+import models.User;
 
 /**
  * @author gary

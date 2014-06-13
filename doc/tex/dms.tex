@@ -278,6 +278,18 @@ http://www.playframework.com/documentation/2.1.0/JavaJPA
 
 \section{Testbericht}
 \section{Aufgetretene Probleme}
+\subsection{Play Version inkompatibel mit JPA}
+Ab Play 2.x wurden viele Klassen wie z.B. jpa.db.jpa.Model entfernt, daher mussten wir zu Play 1.2.7 Version wechseln, da sie diese Klasse und vieles mehr unterstützt. Dies hat sehr viel Zeit gekostet, da die Konfiguration in den beiden Versionen nicht gleich waren. 
+\subsection{Play Testing Bug}
+Nachdem man "play test" zum Testen ausgeführt hat, so sollte man keinen Code verändern, da die Applikation neu gestartet wird. Danach funktioniert die Authentifizierung nicht mehr.
+\subsection{One To Many add}
+Wenn man bei einer 1:N Beziehung nur auf einer Seite das Objekt der anderen Seite setzt, so wird das nicht automatisch auf der anderen Seite durchgeführt. Das Konkrete Problem war, der User hat ein Dokument zu seinen erstellten Dokumenten hinzugefügt. Jedoch steht dann im hinzugefügten Dokument nicht, wer der Autor war.
+
+Die Lösung dazu ist, dass man das Setzen auf beiden Seiten wie in % TODO: http://en.wikibooks.org/wiki/Java_Persistence/Relationships#Object_corruption.2C_one_side_of_the_relationship_is_not_updated_after_updating_the_other_side
+beschrieben durchführt.
+
+Bei N:M Beziehung tritt dieser Fall nicht auf.
+
 \section{Resultate und Niederlagen}
 \subsection{Niederlagen}
 \bibliography{protokoll}{}

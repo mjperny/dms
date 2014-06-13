@@ -4,9 +4,9 @@ import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import model.Permission;
-import model.Role;
-import model.User;
+import models.Permission;
+import models.Role;
+import models.User;
 
 import org.apache.shiro.authc.AccountException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -39,7 +39,12 @@ public class MyRealm extends JdbcRealm {
 		if (username == null)
 			throw new AccountException(
 					"Null usernames not allowed by this realm.");
-		User user = User.find("byName", username).first();
+		User user = null;
+		try {
+			user = User.find("byName", username).first();
+		} catch(Exception e){
+			System.out.println("User not found!!!");
+		}
 		password = user.getPassword();
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username,
 				password, getName());

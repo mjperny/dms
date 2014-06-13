@@ -2,8 +2,10 @@
 logs
 project/project
 project/target
+eclipse/
 target
 tmp
+test-result
 
 # General
 *.lock

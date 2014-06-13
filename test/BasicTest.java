@@ -10,7 +10,7 @@ import java.util.*;
 
 import play.db.jpa.JPA;
 import play.test.*;
-import model.*;
+import models.*;
 
 public class BasicTest extends UnitTest {
 
@@ -21,6 +21,7 @@ public class BasicTest extends UnitTest {
 
 	@BeforeClass
 	public static void setup() {
+
 		User user = new User();
 		user.setName("gary");
 		user.setPassword("testpassword");
@@ -34,7 +35,7 @@ public class BasicTest extends UnitTest {
 		JPA.em().getTransaction().commit();
 		JPA.em().getTransaction().begin();
 	}
-
+	
 	@Test
 	public void testPermission() {
 		Subject currentUser = SecurityUtils.getSubject();
@@ -43,7 +44,7 @@ public class BasicTest extends UnitTest {
 
 		Document document = Document.find("byName", "Das Dokument").first();		
 		
-		Role role = new RoleFileOwner(document.getId());
+		RoleFile role = new RoleFileOwner();
 		role.save();
 		
 		PermissionManager.getInstance().grantAccess(user, role);

@@ -1,0 +1,33 @@
+# you describe your data using the YAML notation here
+# and then load them using Fixtures.load("data.yml")
+
+# User(bob):
+#   email: bob@gmail.com
+#   password: secret
+#
+
+Document(doc1):
+  name: "doc1"
+  comment: "Cool"
+  lockedStatus: true
+  keyWords: []
+  versions: []
+
+Document(doc2):
+  name: "doc2"
+  comment: "Cooler"
+  lockedStatus: true
+  keyWords: []
+  versions: []
+
+User(tom):
+  name: "tom"
+  password: "letmein"
+  createdDocuments: []
+  roles: [] 
+
+User(gary):
+  name: "gary"
+  password: "password"
+  createdDocuments: []
+  roles: [] 
