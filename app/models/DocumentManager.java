@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Collection;
+
 import play.db.jpa.JPA;
 
 /**
@@ -53,5 +55,44 @@ public class DocumentManager {
 		user.getRoles().add(roleFileUser);
 		user.save();
 		document.save();
+	}
+	
+	/**
+	 * 
+	 */
+	public Document findByKeywords(){
+		return null;
+	}
+	
+	/**
+	 * Finds the document by the name.
+	 * If the given string is contained in the name, then the document will be added
+	 * to the result set.
+	 * @param name the name
+	 * @return a list of documents containing the name
+	 */
+	public Collection<Document> findByNameContains(String name){
+		return Document.find("byNameLike", "%" + name + "%").fetch();
+	}
+	
+	/**
+	 * Finds the document by the given category
+	 * @param documentCategory the category of the document
+	 * @return all documents with the given category
+	 */
+	public Collection<Document> findByCategory(DocumentCategory documentCategory){
+		System.out.println(documentCategory.toString());
+		Collection<Document> list = Document.find("byDocumentcategory", documentCategory.toString()).fetch();
+		System.out.print("Hey the list is " + list);
+		return list;
+	}
+	
+	/**
+	 * Finds the document by the given document type
+	 * @param documentType the type of the category
+	 * @return all documents with the given type
+	 */
+	public Collection<Document> findByType(DocumentType documentType){
+		return Document.find("byDocumenttype", documentType.toString()).fetch();
 	}
 }

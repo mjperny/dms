@@ -36,16 +36,10 @@ public class MyRealm extends JdbcRealm {
 		String username = usernamePasswordToken.getUsername();
 		String password = null;
 		
-		System.out.println("Checking authentification for user " + username);
 		if (username == null)
 			throw new AccountException(
 					"Null usernames not allowed by this realm.");
-		User user = null;
-		try {
-			user = User.find("byName", username).first();
-		} catch(Exception e){
-			System.out.println("User not found!!!");
-		}
+		User user = User.find("byName", username).first();
 		password = user.getPassword();
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username,
 				password, getName());
