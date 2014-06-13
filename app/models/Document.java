@@ -15,8 +15,8 @@ import javax.persistence.OneToMany;
 import play.db.jpa.Model;
 
 /**
- * This is the document class. These documents will be persisted in the database, so that
- * the user can retrieve it later.
+ * The documents will be persisted in the database, so that
+ * it can be retrived later.
  * @version 2014-06-07
  */
 @Entity

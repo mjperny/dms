@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import play.db.jpa.Model;
 
 /**
- * 
+ * Keyword of a document.
  * @version 2014-06-07
  */
 @Entity

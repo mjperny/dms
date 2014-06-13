@@ -11,6 +11,11 @@ import play.Logger;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
 
+/**
+ * As the name says, the class initalizes the project.
+ * @author Gary Ye
+ * @version 2014-06-07
+ */
 @OnApplicationStart
 public class Bootstrap extends Job {
     

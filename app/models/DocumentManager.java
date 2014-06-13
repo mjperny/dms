@@ -3,16 +3,16 @@ package models;
 import play.db.jpa.JPA;
 
 /**
- * Manages the documents. 
+ * Objects of this class can manage the documents.
  * The management consists of granting access, creating document and deleting document.
  * @author Gary Ye
  * @version 2014-06-13
  */
 public class DocumentManager {
 	/**
-	 * Creates a new document 
-	 * @param author
-	 * @param document
+	 * Creates a new document and create new permissions, and roles corresponding to this document.
+	 * @param author the author of the document
+	 * @param document the document to create
 	 */
 	public void createDocument(User author, Document document){
 		// Create the permissions
@@ -42,6 +42,7 @@ public class DocumentManager {
 		document.save();
 		// TODO: Admin ?
 	}
+	
 	/**
 	 * Grants the given user the using access to the specified document
 	 * @param user the user to grant using access

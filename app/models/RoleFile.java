@@ -4,6 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+/**
+ * The abstract class of roles, having to do with documents.
+ * @author Gary Ye
+ * @version 2014-06-13
+ */
 @Entity
 public abstract class RoleFile extends Role {
 	@ManyToOne

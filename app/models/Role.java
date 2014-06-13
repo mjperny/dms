@@ -13,6 +13,11 @@ import javax.persistence.ManyToMany;
 
 import play.db.jpa.Model;
 
+/**
+ * The abstract class of the roles.
+ * @author Gary Ye
+ * @version 2014-06-13
+ */
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public abstract class Role extends Model {

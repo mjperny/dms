@@ -9,6 +9,10 @@ import javax.persistence.InheritanceType;
 
 import play.db.jpa.Model;
 
+/**
+ * This is an abstract class of the permissions.
+ * @version 2014-06-13
+ */
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public abstract class Permission extends Model {

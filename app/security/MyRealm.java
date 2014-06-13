@@ -18,8 +18,6 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-import dao.UserDAO;
-
 
 /**
  * This realm is based on the Hibernate ORM technology to retrieve the data.
@@ -28,6 +26,9 @@ import dao.UserDAO;
  * @version 2014-06-07
  */
 public class MyRealm extends JdbcRealm {
+	/**
+	 * @see JdbcRealm#doGetAuthenticationInfo()
+	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(
 			AuthenticationToken token) {
@@ -51,11 +52,14 @@ public class MyRealm extends JdbcRealm {
 		return info;
 	}
 	
+	/**
+	 * @see JdbcRealm#doGetAuthorizationInfo()
+	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals){
 		String username = (String) getAvailablePrincipal(principals);
 		
-		User user = (new UserDAO()).findByName(username);
+		User user = User.find("byName", username).first();
 		
 		Set<String> roleNames = new LinkedHashSet<String>();
 		Set<String> permissionNames = new LinkedHashSet<String>();

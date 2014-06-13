@@ -11,7 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 /**
- * 
+ * A version of the document represent a real state. This means it also contains
+ * the content of the real document, since every version the content can change.
  * @version 2014-06-07
  */
 @Entity

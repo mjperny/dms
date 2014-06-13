@@ -11,7 +11,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 /**
- * 
+ * The user class.
  * @version 2014-06-07
  */
 @Entity

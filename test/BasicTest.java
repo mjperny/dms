@@ -4,8 +4,6 @@ import org.apache.shiro.subject.Subject;
 import org.dom4j.dom.DOMEntityReference;
 import org.junit.*;
 
-import dao.UserDAO;
-
 import java.util.*;
 
 import play.db.jpa.JPA;
