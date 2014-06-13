@@ -12,3 +12,5 @@ mysql> CREATE DATABASE dms;
 mysql> GRANT ALL PRIVILEGES ON dms.* TO 'dmsuser'@'%' IDENTIFIED BY 'dmspassword';
 mysql> FLUSH PRIVILEGES;
 ```
+
+Es wurde leider keine grafische Oberfläche implementiert, daher finden Sie Testcases im test/ Verzeichnis.
